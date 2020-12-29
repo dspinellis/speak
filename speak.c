@@ -12,7 +12,15 @@
 #define NT 800
 #define NS 9500
 
-char *diags[] {
+char * phread(char *in,char *out);
+char * phpron(char *in,char *out);
+char finals(char *in,char **ls);
+char * insert(char *in,char **ls);
+char * suffix(char *in,char *end,char **s);
+char * longe(char *in,char *end);
+char * vowel(char *in,char *end);
+
+char *diags[] = {
 	0,
 	"bad option",
 	"no vocabulary",
@@ -20,25 +28,25 @@ char *diags[] {
 	"too many words",
 	"too many chars" };
 
-char *aeiou "aeiou";
-char *aeiouy "aeiouy";
-char *aeiouwxy "aeiouwxy";
-char *aeo "aeo";
-char *aou "aou";
-char *bcdfgkpt "bcdfgkpt";
+char *aeiou = "aeiou";
+char *aeiouy = "aeiouy";
+char *aeiouwxy = "aeiouwxy";
+char *aeo = "aeo";
+char *aou = "aou";
+char *bcdfgkpt = "bcdfgkpt";
 
 struct rec {
 	int word,phon;
 };
-int recsize 4;
+int recsize = 4;
 struct rec table[NT];
 char strings[NS];
-int ttop 1;
-int stop 1;
+int ttop = 1;
+int stop = 1;
 char buf[100];
 int eflag;
-int tflag 0;
-int code[] {
+int tflag = 0;
+int code[] = {
 	'a0',	033,	/*AH--co_ntact, ca_r*/
 	'a1',	052,	/*AH1--co_nnect*/
 	'a2',	067,	/*AH2--*/
@@ -106,7 +114,7 @@ int code[] {
 };
 char work[100];
 char line[100];
-int vs 2;
+int vs = 2;
 
 main(argc,argv)
 char **argv; 
@@ -149,7 +157,7 @@ loop:
 		t = line;
 		do	{ 
 			if(!read(0,t,1)) {
-				exit(); 
+				exit(1); 
 			}
 		} 
 		while(*t++!='\n');
@@ -276,7 +284,7 @@ char *s;
 		}
 		while(c){
 			write(f,&c,1);
-			c=>>8; 
+			c>>=8; 
 		}
 	}
 }
@@ -311,8 +319,8 @@ replace(){
 		n = 0;
 		while(*t!=',' && *t!=' ' && *t!=0) {
 			i = *t++;
-			if(n) i=<<8;
-			n =| i; 
+			if(n) i<<=8;
+			n |= i; 
 		}
 		n = dencode(&code[0],&code[1],n);
 		if(n) *u++ = n+ (b<<6);
@@ -385,14 +393,14 @@ writeout(file) {
 		diag(3);
 		return; 
 	}
-	seek(f,recsize*ttop+4,0); /*get to byte 0 of string store*/
+	lseek(f,recsize*ttop+4,0); /*get to byte 0 of string store*/
 	write(f,strings,1);	/*and put it out*/
 	n = 1;
 	for(i=1;i<ttop;i++) {
 		n =+ writo1(f,&table[i].word,n);
 		n =+ writo1(f,&table[i].phon,n); 
 	}
-	seek(f,0,0);
+	lseek(f,0,0);
 	write(f,&ttop,2);
 	write(f,table,recsize*ttop);
 	write(f,&n,2);	/*new value of stop */
@@ -649,22 +657,22 @@ char *in,*end;
 		if(s[2]=='r'&&s[3]=='i'&&oneof(s[1],bcdfgkpt)) s++;
 		if(oneof(s[2],"ie")&&oneof(s[3]|040,aou)
 		    || s[2]=='i'&&s[3]=='e'&&s[4]=='n')
-			*t =^ 040; 
+			*t ^= 040; 
 	}
 	s = in;
 	if(*s=='y') s++;
 	while(!oneof(*s|040,aeiouy)&&s<end) s++;
-	if(oneof(*s,"iy") && oneof(s[1],aou)) *s =^ 040; 
+	if(oneof(*s,"iy") && oneof(s[1],aou)) *s ^= 040; 
 }
 
-char *suff0[] {
+char *suff0[] = {
 	"la",
 	"el",
 	"er",
 	"su",
 	"y",
 	0 };
-char *suff1[] {
+char *suff1[]  = {
 	"elba",
 	"de",
 	"re",
@@ -681,11 +689,11 @@ char *suff1[] {
 	"luf",
 	"tnem",
 	0 };
-char *suff2[] {
+char *suff2[] = {
 	"ci",
 	"laci",
 	0 };
-char *suff3[] {
+char *suff3[] = {
 	"e",
 	0 };
 
@@ -718,7 +726,7 @@ char *in,**ls;
 			t = u; 
 		}
 		if(oneof(*t,"iuy")&&vowel(in,t)<in) {
-			*t =^040;	/*monosyllables in -y, */
+			*t ^=040;	/*monosyllables in -y, */
 			return; 
 		}	/*perhaps suffixed*/
 		if(!oneof(t[t[1]=='|'?2:1],"aeio")) return;
@@ -730,7 +738,7 @@ char *in,**ls;
 		} 
 	}
 	if((t==in||!oneof(t[-1],aeo)) && !(*t=='e'&&t[1]=='l'))
-		*t =^ 040; 
+		*t ^= 040; 
 }
 
 mide(in,ls)
@@ -750,7 +758,7 @@ char *in,**ls;
 			    &&!oneof(u[-1],"aehiouwxy")
 			    &&oneof(u[-2],"aiouyU")
 			    &&!oneof(u[-3],"aeiu")) {
-				if(u[-3]!='o') u[-2] =& ~040; 
+				if(u[-3]!='o') u[-2] &= ~040; 
 			}
 			else return;
 shift:		
@@ -764,7 +772,7 @@ char *in,*end;
 	while(++in<end) 
 		if(*in=='s'&&oneof(in[-1]|040,"aeiouy")
 		    &&oneof(in[1]|040,"aeimouy"))
-			*in =^ 040; 
+			*in ^= 040; 
 }
 
 syltest(in,s,end)
@@ -836,7 +844,7 @@ fold(s)
 char *s;
 {
 	if('A'<=*s && *s <='Z') {
-		*s =^ 040;
+		*s ^= 040;
 		return(1); 
 	}
 	return(0); 
