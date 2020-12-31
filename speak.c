@@ -123,7 +123,7 @@ char **argv;
 {
 	char register *t,*u;
 	int i;
-	char *wtop;
+	int wtop;
 	int f;
 	int pflag,sflag,vflag,lflag;
 	int xflag,yflag,wflag;
@@ -159,7 +159,7 @@ loop:
 		t = line;
 		do	{ 
 			if(!read(0,t,1)) {
-				exit(1); 
+				exit(0); 
 			}
 		} 
 		while(*t++!='\n');
