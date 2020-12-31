@@ -19,6 +19,7 @@ char * insert(char *in,char **ls);
 char * suffix(char *in,char *end,char **s);
 char * longe(char *in,char *end);
 char * vowel(char *in,char *end);
+void readin(char *file);
 void writeout(char * file);
 char * name(void);
 
@@ -364,7 +365,8 @@ name(){
 	return(buf); 
 }
 
-readin(file){
+void
+readin(char *file){
 	int register f;
 	if((f = open(file,0))<0) {
 		diag(2);
