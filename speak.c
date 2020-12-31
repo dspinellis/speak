@@ -12,8 +12,10 @@
 #define NT 800
 #define NS 9500
 
+char * name();
 char * phread();
 char * phpron();
+char * phspell();
 char finals();
 char * insert();
 char * suffix();
@@ -121,7 +123,7 @@ char **argv;
 {
 	char register *t,*u;
 	int i;
-	int wtop;
+	char *wtop;
 	int f;
 	int pflag,sflag,vflag,lflag;
 	int xflag,yflag,wflag;
@@ -351,6 +353,7 @@ copy(){
 	phwrite(name(),buf1); 
 }
 
+char *
 name(){
 	char register *u,*t;
 	u = &line[2];
@@ -533,6 +536,7 @@ diag(n) {
 	write(1,"\n",1); 
 }
 
+char *
 phspell(in,out)
 char *in, *out; 
 {
@@ -568,7 +572,7 @@ char *in, *out;
 	s = t = line+2; 
 	u = in;
 	while(*s++ = *u++);
-	s =- 2;
+	s -= 2;
 	sflag = 0;
 	if(fold(t)) if(sout!=(out=phread(t,out)))
 		return(out);
@@ -626,7 +630,7 @@ finals(in,ls)
 char *in,**ls; 
 {
 	char register *end;
-	int *val;
+	int val;
 	end = *ls;
 	val = 0;
 	if(*end=='s'&&!oneof(end[-1],"us")) {
