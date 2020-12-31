@@ -19,6 +19,8 @@ char * insert(char *in,char **ls);
 char * suffix(char *in,char *end,char **s);
 char * longe(char *in,char *end);
 char * vowel(char *in,char *end);
+void writeout(char * file);
+char * name(void);
 
 char *diags[] = {
 	0,
@@ -351,6 +353,7 @@ copy(){
 	phwrite(name(),buf1); 
 }
 
+char *
 name(){
 	char register *u,*t;
 	u = &line[2];
@@ -386,7 +389,8 @@ int *u;
 	return(k); 
 }
 
-writeout(file) {
+void
+writeout(char * file) {
 	int register f,i;
 	int n;
 	if((f=creat(file,0666))<0) {
