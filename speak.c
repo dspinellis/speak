@@ -14,6 +14,7 @@
 
 char * phread(char *in,char *out);
 char * phpron(char *in,char *out);
+char * phspell(char *in,char *out);
 char finals(char *in,char **ls);
 char * insert(char *in,char **ls);
 char * suffix(char *in,char *end,char **s);
@@ -124,7 +125,7 @@ char **argv;
 {
 	char register *t,*u;
 	int i;
-	int wtop;
+	char *wtop;
 	int f;
 	int pflag,sflag,vflag,lflag;
 	int xflag,yflag,wflag;
@@ -403,8 +404,8 @@ writeout(char * file) {
 	write(f,strings,1);	/*and put it out*/
 	n = 1;
 	for(i=1;i<ttop;i++) {
-		n =+ writo1(f,&table[i].word,n);
-		n =+ writo1(f,&table[i].phon,n); 
+		n += writo1(f,&table[i].word,n);
+		n += writo1(f,&table[i].phon,n); 
 	}
 	lseek(f,0,0);
 	write(f,&ttop,2);
@@ -539,6 +540,7 @@ diag(n) {
 	write(1,"\n",1); 
 }
 
+char *
 phspell(in,out)
 char *in, *out; 
 {
@@ -574,7 +576,7 @@ char *in, *out;
 	s = t = line+2; 
 	u = in;
 	while(*s++ = *u++);
-	s =- 2;
+	s -= 2;
 	sflag = 0;
 	if(fold(t)) if(sout!=(out=phread(t,out)))
 		return(out);
@@ -632,7 +634,7 @@ finals(in,ls)
 char *in,**ls; 
 {
 	char register *end;
-	int *val;
+	int val;
 	end = *ls;
 	val = 0;
 	if(*end=='s'&&!oneof(end[-1],"us")) {
