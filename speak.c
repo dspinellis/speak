@@ -12,13 +12,13 @@
 #define NT 800
 #define NS 9500
 
-char * phread(char *in,char *out);
-char * phpron(char *in,char *out);
-char finals(char *in,char **ls);
-char * insert(char *in,char **ls);
-char * suffix(char *in,char *end,char **s);
-char * longe(char *in,char *end);
-char * vowel(char *in,char *end);
+char * phread();
+char * phpron();
+char finals();
+char * insert();
+char * suffix();
+char * longe();
+char * vowel();
 
 char *diags[] = {
 	0,
@@ -397,8 +397,8 @@ writeout(file) {
 	write(f,strings,1);	/*and put it out*/
 	n = 1;
 	for(i=1;i<ttop;i++) {
-		n =+ writo1(f,&table[i].word,n);
-		n =+ writo1(f,&table[i].phon,n); 
+		n += writo1(f,&table[i].word,n);
+		n += writo1(f,&table[i].phon,n); 
 	}
 	lseek(f,0,0);
 	write(f,&ttop,2);
