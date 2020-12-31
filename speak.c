@@ -159,7 +159,7 @@ loop:
 		t = line;
 		do	{ 
 			if(!read(0,t,1)) {
-				exit(1); 
+				exit(0); 
 			}
 		} 
 		while(*t++!='\n');
