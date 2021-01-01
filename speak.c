@@ -12,23 +12,57 @@
 #define NT 800
 #define NS 9500
 
+#ifdef __unix__
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#endif
+
 #ifdef __STDC__
+#include <stdlib.h>
 #define P(args)  args
 #else
 #define P(args)  ()
+#define void
 #endif
 
-char * phread P((char *in,char *out));
-char * phpron P((char *in,char *out));
-char * phspell P((char *in,char *out));
+struct decenc {
+	int x,y;
+};
+
+int compare P((char *a,char *b));
+void copy P((void));
+void decode P((int f, char *s));
+int dencode P((int t1[],int t2[], int c));
+void diag P((int n));
+void finale P((char *in,char **s));
 char finals P((char *in,char **ls));
-char * insert P((char *in,char **ls));
-char * suffix P((char *in,char *end,char **s));
-char * longe P((char *in,char *end));
-char * vowel P((char *in,char *end));
+int find P((char *in));
+int fold P(( char *s));
+void insert P((char *in,char **ls));
+void list P((int f, char *s));
+char *longe P((char *in,char *end));
+void mide P((char *in,char **ls));
+void mids P((char *in,char *end));
+void midu P((char *in,char *end));
+char *name P((void));
+int oneof P((char c, char *l));
+char *phpron P((char *in,char *out));
+char *phread P((char *in,char *out));
+char *phspell P((char *in,char *out));
+void phwrite P((char *in,char *out));
+int prefix P((char *in));
 void readin P((char *file));
+int replace P((void));
+void stash P((char *s));
+char* suffix P((char *in,char *end,char **s));
+int syltest P((char *in, char *s, char *end));
+int th P((char *s));
+char *vowel P((char *in,char *end));
 void writeout P((char * file));
-char * name P((void));
+int writo1 P((int f,int *u,int n));
+
 
 char *diags[] = {
 	0,
@@ -126,7 +160,9 @@ char work[100];
 char line[100];
 int vs = 2;
 
+int
 main(argc,argv)
+int argc;
 char **argv; 
 {
 	char register *t,*u;
@@ -273,7 +309,9 @@ noword:
 	}
 }
 
+void
 decode(f,s)
+int f;
 char *s; 
 {
 	int b,c;
@@ -307,17 +345,24 @@ char *s;
  * assert(dencode(&code[0],&code[1],'u3') == 034);
  * assert(dencode(&code[1],&code[0],034) == 'u3');
  */
-dencode(t1,t2,c)
-struct {
-	int x,y;
-} 
-t1[], t2[];
+int
+dencode(at1,at2,c)
+int at1[], at2[], c;
 {
+	/*
+	 * Through this cast search and results iterate over the corresponding
+	 * table column.
+	 */
+	struct decenc {
+	       int x,y;
+	};
+	struct decenc *t1 = (struct decenc *)at1, *t2 = (struct decenc *)at2;
 	int register i,d;
 	for(i=0;d=t1[i].x;i++) if(c==d) break;
 	return(t2[i].x); 
 }
 
+int
 replace(){
 	char register *t,*u;
 	int register n;
@@ -350,7 +395,9 @@ replace(){
 	return(1); 
 }
 
+void
 list(f,s)
+int f;
 char *s; 
 {
 	char register *t;
@@ -363,6 +410,7 @@ char *s;
 	write(f,"\n",1); 
 }
 
+void
 copy(){
 	char buf1[100];
 	phread(work,buf1);
@@ -396,7 +444,9 @@ char *file;
 	close(f); 
 }
 
+int
 writo1(f,u,n)
+int f, n;
 int *u; 
 {
 	int register i,j,k;
@@ -433,6 +483,7 @@ char *file;
 }
 
 
+int
 find(in)
 char *in; 
 {
@@ -450,6 +501,7 @@ char *in;
 	return(i); 
 }
 
+int
 prefix(in)
 char *in; 
 {
@@ -484,6 +536,7 @@ loop:
 	return(pref); 
 }
 
+int
 compare(a,b)
 char *a,*b; 
 {
@@ -510,6 +563,7 @@ char *in,*out;
 	return(out); 
 }
 
+void
 phwrite(in,out)
 char *in, *out; 
 {
@@ -542,6 +596,7 @@ char *in, *out;
 	stash(out); 
 }
 
+void
 stash(s)
 char *s; 
 {
@@ -551,7 +606,10 @@ char *s;
 	diag(5); 
 }
 
-diag(n) {
+void
+diag(n)
+int n;
+{
 	char register *p;
 	p = diags[n];
 	while(*p) write(1,p++,1); 
@@ -668,6 +726,7 @@ char *in,**ls;
 	return(val); 
 }
 
+void
 midu(in,end)
 char *in,*end;
 {
@@ -723,6 +782,7 @@ char *suff3[] = {
 	"e",
 	0 };
 
+void
 finale(in,ls)
 char *in,**ls; 
 {
@@ -767,6 +827,7 @@ char *in,**ls;
 		*t ^= 040; 
 }
 
+void
 mide(in,ls)
 char *in,**ls; 
 {
@@ -792,6 +853,7 @@ shift:
 		} 
 }
 
+void
 mids(in,end)
 char *in,*end; 
 {
@@ -801,6 +863,7 @@ char *in,*end;
 			*in ^= 040; 
 }
 
+int
 syltest(in,s,end)
 char *in,*end,*s; 
 {
@@ -813,7 +876,7 @@ char *in,*end,*s;
 	return(0); 
 }
 
-char *
+void
 insert(in,ls)
 char *in,**ls; 
 {
@@ -850,6 +913,7 @@ char *in, *end;
 	return(!oneof(*end|040,aeiouwxy)&&oneof(*--end,aeiouy)?end:in-1); 
 }
 
+int
 oneof(c,l)
 char c,*l;
 { 
@@ -866,6 +930,7 @@ char *in,*end;
 	return(end); 
 }
 
+int
 fold(s)
 char *s;
 {
@@ -876,6 +941,7 @@ char *s;
 	return(0); 
 }
 
+int
 th(s)
 char *s; 
 {
