@@ -437,9 +437,9 @@ char *file;
 		diag(2);
 		return;
 	}
-	read(f,&ttop,2);
+	read(f,&ttop,sizeof(ttop));
 	read(f,table,recsize*ttop);
-	read(f,&stop,2);
+	read(f,&stop,sizeof(stop));
 	read(f,strings,stop);
 	close(f);
 }
@@ -476,9 +476,9 @@ char *file;
 		n += writo1(f,&table[i].phon,n);
 	}
 	lseek(f,0,0);
-	write(f,&ttop,2);
+	write(f,&ttop,sizeof(ttop));
 	write(f,table,recsize*ttop);
-	write(f,&n,2);	/*new value of stop */
+	write(f,&n,sizeof(n));	/*new value of stop */
 	close(f);
 }
 
