@@ -12,17 +12,23 @@
 #define NT 800
 #define NS 9500
 
-char * phread(char *in,char *out);
-char * phpron(char *in,char *out);
-char * phspell(char *in,char *out);
-char finals(char *in,char **ls);
-char * insert(char *in,char **ls);
-char * suffix(char *in,char *end,char **s);
-char * longe(char *in,char *end);
-char * vowel(char *in,char *end);
-void readin(char *file);
-void writeout(char * file);
-char * name(void);
+#ifdef __STDC__
+#define P(args)  args
+#else
+#define P(args)  ()
+#endif
+
+char * phread P((char *in,char *out));
+char * phpron P((char *in,char *out));
+char * phspell P((char *in,char *out));
+char finals P((char *in,char **ls));
+char * insert P((char *in,char **ls));
+char * suffix P((char *in,char *end,char **s));
+char * longe P((char *in,char *end));
+char * vowel P((char *in,char *end));
+void readin P((char *file));
+void writeout P((char * file));
+char * name P((void));
 
 char *diags[] = {
 	0,
