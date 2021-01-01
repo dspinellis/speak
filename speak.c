@@ -167,7 +167,7 @@ char **argv;
 {
 	char register *t,*u;
 	int i;
-	int wtop;
+	char *wtop;
 	int f;
 	int pflag,sflag,vflag,lflag;
 	int xflag,yflag,wflag;
