@@ -82,7 +82,7 @@ char *bcdfgkpt = "bcdfgkpt";
 struct rec {
 	int word,phon;
 };
-int recsize = 4;
+int recsize = sizeof(struct rec);
 struct rec table[NT];
 char strings[NS];
 int ttop = 1;
