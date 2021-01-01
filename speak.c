@@ -138,6 +138,7 @@ char **argv;
 	char register *w;
 	char *v;
 	pflag =  eflag =sflag = vflag = 1;
+
 	if(argc>1 && *argv[1]=='-') {
 loop:	
 		switch(*(argv[1]++)) {
@@ -299,6 +300,13 @@ char *s;
 	}
 }
 
+/*
+ * Encode and decode from the first column of code to the second, and
+ * the opposite.
+ * Examples:
+ * assert(dencode(&code[0],&code[1],'u3') == 034);
+ * assert(dencode(&code[1],&code[0],034) == 'u3');
+ */
 dencode(t1,t2,c)
 struct {
 	int x,y;
