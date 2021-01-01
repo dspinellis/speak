@@ -373,7 +373,9 @@ name(){
 }
 
 void
-readin(char *file){
+readin(file)
+char *file;
+{
 	int register f;
 	if((f = open(file,0))<0) {
 		diag(2);
@@ -399,7 +401,9 @@ int *u;
 }
 
 void
-writeout(char * file) {
+writeout(file)
+char *file;
+{
 	int register f,i;
 	int n;
 	if((f=creat(file,0666))<0) {
