@@ -6,9 +6,13 @@
 # Protect all characters to avoid double replacements
 s/./&/g
 
+s/\0//g;
+
 # Generated mostly from the comments in speak.c
 # Note that phonemes have the high bit set 
-s/\\o133/AH\n/g
+
+# \133
+s/\[/AH\n/g
 s/\o152/AH1\n/g
 s/\o167/AH2\n/g
 s/\o102/AW\n/g
@@ -27,7 +31,8 @@ s/\o105/ER\n/g
 s/\o123/E\n/g
 s/\o126/Y\n/g
 s/\o135/Y1\n/g
-s/\o103/IE\n/g
+# No sample for IE use I2
+s/\o103/I2\n/g
 s/\o136/AY\n/g
 s/\o130/I\n/g
 s/\o164/I1\n/g
