@@ -1,4 +1,4 @@
-CFLAGS=-Werror -Wno-multichar -g -O0 -DDEBUG
+CFLAGS=-Werror -g -O0 -DDEBUG
 
 all: speak speak.m
 

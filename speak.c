@@ -90,71 +90,74 @@ int stop = 1;
 char buf[100];
 int eflag;
 int tflag = 0;
+
+#define p(a, b) ((b << 8) | a)
+
 int code[] = {
-	'a0',	033,	/*AH--co_ntact, ca_r*/
-	'a1',	052,	/*AH1--co_nnect*/
-	'a2',	067,	/*AH2--*/
-	'W0',	002,	/*AW--ca_ll, law__ (,l,u2,aw)*/
-	'W1',	054,	/*AW1--fau__lt*/
-	'W2',	017,	/*AW2--*/
-	'ae',	021,	/*AE--ca_t, sa_t*/
-	'ea',	020,	/*EA1--a_ntenna*/
-	'A0',	037,	/*A--na_me (,n,ai,y0,m)*/
-	'A1',	071,	/*A1--na_mely*/
-	'A2',	072,	/*A2--*/
-	'e0',	004,	/*EH--me_t, e_nter*/
-	'e1',	075,	/*EH1--*/
-	'e2',	076,	/*EH2--*/
-	'e3',	077,	/*EH3--*/
-	'er',	005,	/*ER--weather__*/
-	'E0',	023,	/*E--three__*/
-	'E1',	026,	/*Y--sixty_*/
-	'E2',	035,	/*Y1--y_es*/
-	'y0',	003,	/*IE--ze_ro*/
-	'y1',	036,	/*AY--may_*/
-	'i0',	030,	/*I--si_x*/
-	'i1',	064,	/*I1--i_nept, i_nside*/
-	'i2',	065,	/*I2--stati_c*/
-	'i3',	066,	/*I3--*/
-	'o0',	031,	/*O--o_nly, no_*/
-	'o1',	012,	/*O1--lostcomment*/
-	'o2',	013,	/*O2--lostcomment*/
-	'ou',	051,	/*OO1--lostcommen*/
-	'eu',	011,	/*IU--lostcomment*/
-	'oo',	050,	/*OO--lostcomment*/
-	'u0',	014,	/*UH--lostcomment*/
-	'u1',	015,	/*UH1--lostcommen*/
-	'u2',	016,	/*UH2--lostcommen*/
-	'u3',	034,	/*UH3--lostcommen*/
-	'U0',	027,	/*U--lost comment*/
-	'U1',	010,	/*U1--lostcomm*/
-	'b',	061,
-	'd',	041,
-	'dt',	073,
-	'f',	042,
-	'g',	043,
-	'h',	044,
-	'k',	046,
-	'l',	047,
-	'm',	063,
-	'n',	062,
-	'p',	032,
-	'r',	024,
-	's',	040,
-	't',	025,
-	'v',	060,
-	'w',	022,
-	'z',	055,
-	'sh',	056,
-	'zh',	070,	/*ZH--pleas_ure*/
-	'j',	045,	/*J--edge_ */
-	'ch',	057,	/*CH--batch__*/
-	'th',	006,	/*TH--th__in*/
-	'dh',	007,	/*THV--th__en*/
-	'ng',	053,	/*NG--long__, in_k*/
-	'-0',	001,	/*PA1*/
-	'-1',	074,	/*PA0--short pause*/
-	0,	0
+	p('a','0'),	033,	/*AH--co_ntact, ca_r*/
+	p('a','1'),	052,	/*AH1--co_nnect*/
+	p('a','2'),	067,	/*AH2--*/
+	p('W','0'),	002,	/*AW--ca_ll, law__ (,l,u2,aw)*/
+	p('W','1'),	054,	/*AW1--fau__lt*/
+	p('W','2'),	017,	/*AW2--*/
+	p('a','e'),	021,	/*AE--ca_t, sa_t*/
+	p('e','a'),	020,	/*EA1--a_ntenna*/
+	p('A','0'),	037,	/*A--na_me (,n,ai,y0,m)*/
+	p('A','1'),	071,	/*A1--na_mely*/
+	p('A','2'),	072,	/*A2--*/
+	p('e','0'),	004,	/*EH--me_t, e_nter*/
+	p('e','1'),	075,	/*EH1--*/
+	p('e','2'),	076,	/*EH2--*/
+	p('e','3'),	077,	/*EH3--*/
+	p('e','r'),	005,	/*ER--weather__*/
+	p('E','0'),	023,	/*E--three__*/
+	p('E','1'),	026,	/*Y--sixty_*/
+	p('E','2'),	035,	/*Y1--y_es*/
+	p('y','0'),	003,	/*IE--ze_ro*/
+	p('y','1'),	036,	/*AY--may_*/
+	p('i','0'),	030,	/*I--si_x*/
+	p('i','1'),	064,	/*I1--i_nept, i_nside*/
+	p('i','2'),	065,	/*I2--stati_c*/
+	p('i','3'),	066,	/*I3--*/
+	p('o','0'),	031,	/*O--o_nly, no_*/
+	p('o','1'),	012,	/*O1--lostcomment*/
+	p('o','2'),	013,	/*O2--lostcomment*/
+	p('o','u'),	051,	/*OO1--lostcommen*/
+	p('e','u'),	011,	/*IU--lostcomment*/
+	p('o','o'),	050,	/*OO--lostcomment*/
+	p('u','0'),	014,	/*UH--lostcomment*/
+	p('u','1'),	015,	/*UH1--lostcommen*/
+	p('u','2'),	016,	/*UH2--lostcommen*/
+	p('u','3'),	034,	/*UH3--lostcommen*/
+	p('U','0'),	027,	/*U--lost comment*/
+	p('U','1'),	010,	/*U1--lostcomm*/
+	'b',		061,
+	'd',		041,
+	p('d','t'),	073,
+	'f',		042,
+	'g',		043,
+	'h',		044,
+	'k',		046,
+	'l',		047,
+	'm',		063,
+	'n',		062,
+	'p',		032,
+	'r',		024,
+	's',		040,
+	't',		025,
+	'v',		060,
+	'w',		022,
+	'z',		055,
+	p('s','h'),	056,
+	p('z','h'),	070,	/*ZH--pleas_ure*/
+	'j',		045,	/*J--edge_ */
+	p('c','h'),	057,	/*CH--batch__*/
+	p('t','h'),	006,	/*TH--th__in*/
+	p('d','h'),	007,	/*THV--th__en*/
+	p('n','g'),	053,	/*NG--long__, in_k*/
+	p('-','0'),	001,	/*PA1*/
+	p('-','1'),	074,	/*PA0--short pause*/
+	0,		0
 };
 char work[100];
 char line[100];
