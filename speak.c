@@ -158,7 +158,8 @@ int code[] = {
 };
 char work[100];
 char line[100];
-int vs = 2;
+/* Voice synthesizer file descriptor */
+int vs = 1;
 
 int
 main(argc,argv)
@@ -197,7 +198,7 @@ loop:
 		argc--;
 		argv++;
 	}
-	if(vflag) vs = argc>2?creat(argv[2],0666):open("/dev/vs",1);
+	if(vflag) vs = argc>2?creat(argv[2],0666):1;
 	readin(argc>1 ? argv[1]:"/usr/lib/speak.m");
 	for(;;)	{
 
