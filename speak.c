@@ -620,8 +620,8 @@ char *
 phspell(in,out)
 char *in, *out;
 {
-	char register *c,*t;
-	c = "* \0";
+	char register *t;
+	char c[] = "* \0";
 	while(c[1] = *in++) {
 		fold(&c[1]);
 		t = phread(c,out);
