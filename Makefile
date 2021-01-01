@@ -1,7 +1,9 @@
+CFLAGS=-Werror -Wno-multichar -g -O0 -DDEBUG
+
 all: speak speak.m
 
 speak: speak.c
-	$(CC) -Werror -Wno-multichar -o $@ $?
+	$(CC) $(CFLAGS) -o $@ $?
 
 speak.m: speak.v speak
 	(cat speak.v; echo !w speak.m) | ./speak -v /dev/null
