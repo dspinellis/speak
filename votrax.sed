@@ -42,7 +42,8 @@ s/\o150/OO\n/g
 s/\o114/UH\n/g
 s/\o115/UH1\n/g
 s/\o116/UH2\n/g
-s/\o134/UH3\n/g
+# \o134
+s/\\/UH3\n/g
 s/\o127/U\n/g
 s/\o110/U1\n/g
 s/\o161/B\n/g
