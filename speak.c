@@ -468,7 +468,7 @@ char *file;
 		diag(3);
 		return;
 	}
-	lseek(f,recsize*ttop+4,0); /*get to byte 0 of string store*/
+	lseek(f,recsize*ttop+sizeof(ttop)+sizeof(n),0); /*get to byte 0 of string store*/
 	write(f,strings,1);	/*and put it out*/
 	n = 1;
 	for(i=1;i<ttop;i++) {
