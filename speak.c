@@ -310,6 +310,7 @@ noword:
 	}
 }
 
+/* Decode s for listing */
 void
 decode(f,s)
 int f;
@@ -597,6 +598,7 @@ char *in, *out;
 	stash(out);
 }
 
+/* Add the passed string to the string table, updating stop */
 void
 stash(s)
 char *s;
