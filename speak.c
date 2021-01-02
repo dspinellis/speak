@@ -120,20 +120,20 @@ int code[] = {
 	p('i','2'),	065,	/*I2--stati_c*/
 	p('i','3'),	066,	/*I3--*/
 	p('o','0'),	031,	/*O--o_nly, no_*/
-	p('o','1'),	012,	/*O1--lostcomment*/
-	p('o','2'),	013,	/*O2--lostcomment*/
-	p('o','u'),	051,	/*OO1--lostcommen*/
-	p('e','u'),	011,	/*IU--lostcomment*/
-	p('o','o'),	050,	/*OO--lostcomment*/
-	p('u','0'),	014,	/*UH--lostcomment*/
-	p('u','1'),	015,	/*UH1--lostcommen*/
-	p('u','2'),	016,	/*UH2--lostcommen*/
-	p('u','3'),	034,	/*UH3--lostcommen*/
-	p('U','0'),	027,	/*U--lost comment*/
-	p('U','1'),	010,	/*U1--lostcomm*/
+	p('o','1'),	012,	/*O1--hello_*/
+	p('o','2'),	013,	/*O2--no_tice*/
+	p('o','u'),	051,	/*OO1--goo__d shou__ld*/
+	p('e','u'),	011,	/*IU--new_*/
+	p('o','o'),	050,	/*OO--loo__k*/
+	p('u','0'),	014,	/*UH--bu_t*/
+	p('u','1'),	015,	/*UH1--u_ncle*/
+	p('u','2'),	016,	/*UH2--stirru_p*/
+	p('u','3'),	034,	/*UH3--app_le ab_le*/
+	p('U','0'),	027,	/*U--u_se*/
+	p('U','1'),	010,	/*U1--u_nite*/
 	'b',		061,
 	'd',		041,
-	p('d','t'),	073,
+	p('d','t'),	073,	/*OOH--Goe__the cheveu__x(?)*/
 	'f',		042,
 	'g',		043,
 	'h',		044,
@@ -148,7 +148,7 @@ int code[] = {
 	'v',		060,
 	'w',		022,
 	'z',		055,
-	p('s','h'),	056,
+	p('s','h'),	056,	/*SH--sh__ow, sh__ip*/
 	p('z','h'),	070,	/*ZH--pleas_ure*/
 	'j',		045,	/*J--edge_ */
 	p('c','h'),	057,	/*CH--batch__*/
