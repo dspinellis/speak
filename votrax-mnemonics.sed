@@ -6,7 +6,8 @@
 #
 
 # Protect all characters to avoid double replacements
-s/./&/g
+# For this to work sed must be invoked with LC_ALL=C
+s/[\d001-\d255]/&/g
 
 # Generated mostly from the comments in speak.c
 
@@ -45,12 +46,12 @@ s/\o250/'\o150/g
 s/\o214/'\o114/g
 s/\o215/'\o115/g
 s/\o216/'\o116/g
-s/\o234/'\o134/g
+s/\o234/'\\/g
 s/\o227/'\o127/g
 s/\o210/'\o110/g
 s/\o261/'\o161/g
 s/\o241/'\o141/g
-s/\o273/'\o173/g,
+s/\o273/'\o173/g
 s/\o242/'\o142/g
 s/\o243/'\o143/g
 s/\o244/'\o144/g
