@@ -8,16 +8,17 @@ reviving it can be found in
 
 ## Repository contents
 * `speak.c`: Original source code adjusted to run on modern computers;
-   commits clearly show modifications made
+   [commits](https://github.com/dspinellis/speak/commits/master/speak.c) detail
+   the modifications made
 * `speak.v`: Original speech rules
 * `Makefile`: Code and rule compilation (modern addition)
-* `votrax-espeak.md`:
+* [votrax-espeak.md](https://github.com/dspinellis/speak/blob/master/votrax-espeak.md): Map between Votrax, speak, and espeak phoneme codes
 * `votrax-mnemonics.sed`: Convert _speak_ output into Votrax mnemonics.
    (Modern addition as a debugging aid.)
 * `votrax-espeak.sed`: Convert _speak_ output into
    [espeak-ng](https://github.com/espeak-ng/espeak-ng) phonemes.
    (Modern addition.)
-* `Caldera-license.pdf`: Early Unix source code license terms.
+* [Caldera-license.pdf](https://github.com/dspinellis/speak/blob/master/Caldera-license.pdf): Early Unix source code license terms.
 
 ## Build
 Run `make` on a system with a C compiler and _make_.
