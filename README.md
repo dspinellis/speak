@@ -7,18 +7,18 @@ reviving it can be found in
 [this blog post](https://www.spinellis.gr/blog/20210102/).
 
 ## Repository contents
+### 1970s code
 * `speak.c`: Original source code adjusted to run on modern computers;
    [commits](https://github.com/dspinellis/speak/commits/master/speak.c) detail
    the modifications made
-* `speak.v`: Original speech rules
-* `Makefile`: Code and rule compilation (modern addition)
+* `speak.v`: Speech rules
+### Modern additions
+* `Makefile`: Code and rule compilation
 * [votrax-espeak.md](https://github.com/dspinellis/speak/blob/master/votrax-espeak.md): Map between Votrax, speak, and espeak phoneme codes
-* `votrax-mnemonics.sed`: Convert _speak_ output into Votrax mnemonics.
-   (Modern addition as a debugging aid.)
+* `votrax-mnemonics.sed`: Convert _speak_ output into Votrax mnemonics to help debugging
 * `votrax-espeak.sed`: Convert _speak_ output into
-   [espeak-ng](https://github.com/espeak-ng/espeak-ng) phonemes.
-   (Modern addition.)
-* [Caldera-license.pdf](https://github.com/dspinellis/speak/blob/master/Caldera-license.pdf): Early Unix source code license terms.
+   [espeak-ng](https://github.com/espeak-ng/espeak-ng) phonemes
+* [Caldera-license.pdf](https://github.com/dspinellis/speak/blob/master/Caldera-license.pdf): Early Unix source code license terms
 
 ## Build
 Run `make` on a system with a C compiler and _make_.
