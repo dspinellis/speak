@@ -1,4 +1,4 @@
-#!/bin/sed -f
+#!/usr/bin/env sed -f
 #
 # Convert speak(6) output into VOTRAX phonetic code mnemonics, one per line.
 # It is assumed that input has level-2 and level-2 inflection (0100, 0200).

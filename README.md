@@ -34,6 +34,10 @@ LC_ALL=C ./votrax-espeak.sed |
 espeak
 ```
 
+## Ports to other languages
+
+* [Rust](rs/RUST-SPEAK.md)
+
 ## Contribute
 Improvements to the [phoneme map](https://github.com/dspinellis/speak/blob/master/votrax-espeak.md)
 as well as bug fixes that retain the historical accuracy of the _speak_ and rules source code are welcomed
